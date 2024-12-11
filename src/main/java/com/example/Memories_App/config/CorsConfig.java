@@ -12,16 +12,10 @@ public class CorsConfig {
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
+        return new WebMvcConfigurerAdapter() {
             @Override
-            public void addCorsMappings(@NotNull @Nullable CorsRegistry registry) {
-                assert registry != null;
-                registry.addMapping("/**")
-                        .allowedOrigins("https://memories-app-deploy-production.up.railway.app")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowedHeaders("*")
-                        .allowCredentials(true)
-                        .maxAge(3600);
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**");
             }
         };
     }
