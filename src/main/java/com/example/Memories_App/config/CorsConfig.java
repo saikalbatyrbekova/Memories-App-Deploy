@@ -1,22 +1,23 @@
-// package com.example.Memories_App.config;
+package com.example.Memories_App.config;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
-// import jakarta.annotation.Nullable;
-// import jakarta.validation.constraints.NotNull;
-// import org.springframework.context.annotation.Bean;
-// import org.springframework.context.annotation.Configuration;
-// import org.springframework.web.servlet.config.annotation.CorsRegistry;
-// import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+@Configuration
+public class CorsConfig {
 
-// @Configuration
-// public class CorsConfig {
+    @Bean
+    public CorsFilter corsFilter() {
+        CorsConfiguration config = new CorsConfiguration();
+        config.addAllowedOrigin("*");
+        config.addAllowedMethod("*");
+        config.addAllowedHeader("*");
+        config.setAllowCredentials(true);
 
-//     @Bean
-//     public WebMvcConfigurer corsConfigurer() {
-//         return new WebMvcConfigurerAdapter() {
-//             @Override
-//             public void addCorsMappings(CorsRegistry registry) {
-//                 registry.addMapping("/**");
-//             }
-//         };
-//     }
-// }
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
+    }
+}
